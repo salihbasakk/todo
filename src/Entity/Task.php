@@ -48,6 +48,12 @@ class Task
      */
     private $category;
 
+    /**
+     * @var int
+     * @ORM\Column(name="status", type="integer", nullable=false)
+     */
+    private $status;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -89,5 +95,14 @@ class Task
         return $this;
     }
 
+    public function getStatus(): int
+    {
+        return $this->status;
+    }
+
+    public function setStatus(int $status): void
+    {
+        $this->status = $status;
+    }
 
 }

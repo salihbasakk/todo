@@ -24,6 +24,9 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
+    App\EventListener\DoneListener:
+        tags:
+            - { name: kernel.event_listener, event: 'my.event', method: 'doneNotify' }
 framework:
     templating:
         engines: ['twig', 'php']

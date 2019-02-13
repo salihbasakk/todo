@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Category
@@ -28,6 +29,24 @@ class Category
      */
     private $name;
 
+    /**
+     * @var \User
+     *
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * })
+     */
+    private $user;
+
+    // ...
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Task", mappedBy="category")
+     */
+    protected $tasks;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -45,5 +64,14 @@ class Category
         return $this;
     }
 
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+    }
 
 }

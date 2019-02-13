@@ -31,10 +31,9 @@ class User extends BaseUser
      */
     protected $tasks;
 
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
-
 
 }

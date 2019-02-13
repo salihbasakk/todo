@@ -8,7 +8,6 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Name</th>
                 <th>actions</th>
             </tr>
@@ -16,11 +15,11 @@
         <tbody>
         {% for task in tasks %}
             <tr>
-                <td>{{ task.id }}</td>
                 <td>{{ task.name }}</td>
                 <td>
                     <a href="{{ path('task_show', {'id': task.id}) }}">show</a>
                     <a href="{{ path('task_edit', {'id': task.id}) }}">edit</a>
+                    <a href="{{ path('task_done',{'id': task.id}) }}">done</a>
                 </td>
             </tr>
         {% else %}
