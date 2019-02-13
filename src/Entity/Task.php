@@ -95,7 +95,7 @@ class Task
         return $this;
     }
 
-    public function getStatus(): int
+    public function getStatus(): ?int
     {
         return $this->status;
     }

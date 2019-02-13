@@ -122,9 +122,12 @@ class TaskController extends AbstractController
     {
         $task->setStatus('1');
 
+        $this->em->persist($task);
+        $this->em->flush();
+
         $event = new DoneEvent();
         $dispatcher->dispatch(DoneEvent::NAME, $event);
 
-        return $this->render('task/done.html.twig');
+        return $this->redirectToRoute('task_index');
     }
 }

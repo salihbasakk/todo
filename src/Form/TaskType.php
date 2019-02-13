@@ -15,6 +15,7 @@ class TaskType extends AbstractType
             ->add('name')
             ->add('user')
             ->add('category')
+            ->add('status')
         ;
     }
 
