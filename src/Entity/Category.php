@@ -74,4 +74,8 @@ class Category
         $this->user = $user;
     }
 
+    public function __toString()
+    {
+        return $this->name;
+    }
 }
