@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: salih
- * Date: 12.02.2019
- * Time: 16:04
- */
 
 namespace App\EventListener;
 
@@ -17,18 +11,15 @@ class DoneListener
      * @var \Swift_Mailer $mailer
      */
     protected $mailer;
-
     /**
      * @var TwigEngine $twigEngine
      */
     protected $twigEngine;
-
     public function __construct(TwigEngine $twigEngine, \Swift_Mailer $mailer)
     {
         $this->twigEngine = $twigEngine;
         $this->mailer = $mailer;
     }
-
     public function doneNotify(DoneEvent $doneEvent)
     {
         $message = (new \Swift_Message('Congratulations!'))
@@ -42,8 +33,6 @@ class DoneListener
                 'text/html'
             )
         ;
-
         $this->mailer->send($message);
-
     }
 }
