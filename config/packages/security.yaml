@@ -31,4 +31,5 @@ security:
          - { path: ^/admin, roles: [ROLE_ADMIN, ROLE_USER] }
          - { path: ^/category, roles: [ROLE_ADMIN, ROLE_USER] }
          - { path: ^/task, roles: [ROLE_ADMIN, ROLE_USER] }
+         - { path: ^/done, roles: [ROLE_ADMIN, ROLE_USER] }
 

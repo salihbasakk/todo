@@ -126,6 +126,7 @@ class TaskController extends AbstractController
         $this->em->flush();
 
         $event = new DoneEvent();
+
         $dispatcher->dispatch(DoneEvent::NAME, $event);
 
         return $this->redirectToRoute('task_index');

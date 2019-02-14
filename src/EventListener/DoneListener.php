@@ -9,16 +9,33 @@
 namespace App\EventListener;
 
 use App\Event\DoneEvent;
+use Symfony\Bridge\Twig\TwigEngine;
 
 class DoneListener
 {
-    public function doneNotify(DoneEvent $doneEvent, \Swift_Mailer $mailer)
+    /**
+     * @var \Swift_Mailer $mailer
+     */
+    protected $mailer;
+
+    /**
+     * @var TwigEngine $twigEngine
+     */
+    protected $twigEngine;
+
+    public function __construct(TwigEngine $twigEngine, \Swift_Mailer $mailer)
+    {
+        $this->twigEngine = $twigEngine;
+        $this->mailer = $mailer;
+    }
+
+    public function doneNotify(DoneEvent $doneEvent)
     {
         $message = (new \Swift_Message('Congratulations!'))
             ->setFrom('send@example.com')
             ->setTo('salihbasakk@gmail.com')
             ->setBody(
-                $this->renderView(
+                $this->twigEngine->render(
                     'emails/donetask.html.twig',
                     ['doneEvent' => $doneEvent]
                 ),
@@ -26,8 +43,7 @@ class DoneListener
             )
         ;
 
-        $mailer->send($message);
+        $this->mailer->send($message);
 
     }
-
 }

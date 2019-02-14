@@ -25,6 +25,7 @@ services:
         tags: ['controller.service_arguments']
 
     App\EventListener\DoneListener:
+        arguments: ['@templating.engine.twig']
         tags:
             - { name: kernel.event_listener, event: 'my.event', method: 'doneNotify' }
 framework:
