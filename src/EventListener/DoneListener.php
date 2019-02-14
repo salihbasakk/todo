@@ -32,7 +32,7 @@ class DoneListener
     public function doneNotify(DoneEvent $doneEvent)
     {
         $message = (new \Swift_Message('Congratulations!'))
-            ->setFrom('send@example.com')
+            ->setFrom('crawler.enuygun@gmail.com')
             ->setTo('salihbasakk@gmail.com')
             ->setBody(
                 $this->twigEngine->render(
