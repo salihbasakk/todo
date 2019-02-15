@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Task;
+use App\Entity\User;
 use App\Event\DoneEvent;
 use App\Form\TaskType;
 use App\Repository\TaskRepository;
@@ -126,6 +127,8 @@ class TaskController extends AbstractController
         $this->em->flush();
 
         $event = new DoneEvent();
+
+        $event->setTask($task);
 
         $dispatcher->dispatch(DoneEvent::NAME, $event);
 
