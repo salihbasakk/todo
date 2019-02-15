@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Task;
-use App\Entity\User;
 use App\Event\DoneEvent;
 use App\Form\TaskType;
 use App\Repository\TaskRepository;
@@ -57,9 +56,8 @@ class TaskController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($task);
-            $entityManager->flush();
+            $this->em->persist($task);
+            $this->em->flush();
 
             return $this->redirectToRoute('task_index');
         }
@@ -89,7 +87,7 @@ class TaskController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $this->em->flush();
 
             return $this->redirectToRoute('task_index', [
                 'id' => $task->getId(),
@@ -108,9 +106,8 @@ class TaskController extends AbstractController
     public function delete(Request $request, Task $task): Response
     {
         if ($this->isCsrfTokenValid('delete'.$task->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($task);
-            $entityManager->flush();
+            $this->em->remove($task);
+            $this->em->flush();
         }
 
         return $this->redirectToRoute('task_index');
