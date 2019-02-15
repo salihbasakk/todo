@@ -132,6 +132,6 @@ class TaskController extends AbstractController
 
         $dispatcher->dispatch(DoneEvent::NAME, $event);
 
-        return $this->redirectToRoute('task_index');
+        return $this->render('donetask.html.twig');
     }
 }

@@ -29,8 +29,7 @@ class DoneListener
             ->setTo($doneEvent->getTask()->getUser()->getEmail())
             ->setBody(
                 $this->twigEngine->render(
-                    'emails/donetask.html.twig',
-                    ['doneEvent' => $doneEvent]
+                    'emails/email.html.twig'
                 ),
                 'text/html'
             )
