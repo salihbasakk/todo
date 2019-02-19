@@ -5,6 +5,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'en'
+    mongodb_server: "mongodb://127.0.0.1:27017"
 
 services:
     # default configuration for services in *this* file
@@ -28,6 +29,22 @@ services:
         arguments: ['@templating.engine.twig']
         tags:
             - { name: kernel.event_listener, event: 'my.event', method: 'doneNotify' }
+
+    App\EventListener\RequestListener:
+        tags:
+            - { name: kernel.event_listener, event: 'kernel.response', method: 'listenRequest' }
+
+    MongoClient:
+        class: MongoClient
+        arguments: ['%mongodb_server%']
+        public: true
+
+    Memcached:
+        class: Memcached
+        calls:
+            - [ addServer, [ '127.0.0.1', '11211' ]]
+        public: true
+
 framework:
     templating:
         engines: ['twig', 'php']
