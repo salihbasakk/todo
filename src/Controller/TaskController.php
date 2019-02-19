@@ -33,16 +33,21 @@ class TaskController extends AbstractController
     /**
      * @Route("/", name="task_index", methods={"GET"})
      */
-    public function index(Request $request, TaskRepository $taskRepository, \Memcached $memcached): Response
+    public function index(Request $request, TaskRepository $taskRepository, \Memcached $mem): Response
     {
         $categoryId = $request->get('category_id');
 
-        return $this->render('task/index.html.twig', [
-            'tasks' => $taskRepository->findBy(["category" => $categoryId,
-                "user" => $this->getUser(),
-                "status" => '0']),
-        ]);
+        $memcacheKey = 'tasks' . $categoryId;
 
+        if(!($tasks = $mem->get($memcacheKey))){
+            $tasks = $taskRepository->findBy(["category" => $categoryId, "user" => $this->getUser(), "status" => '0']);
+
+            $mem->set($memcacheKey, $tasks,1500);
+        }
+
+        return $this->render('task/index.html.twig', [
+            'tasks' =>$tasks
+        ]);
     }
 
     /**
