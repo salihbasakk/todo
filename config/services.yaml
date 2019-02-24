@@ -34,6 +34,10 @@ services:
         tags:
             - { name: kernel.event_listener, event: 'kernel.response', method: 'listenRequest' }
 
+    App\EventListener\MemcacheListener:
+        tags:
+            - { name: kernel.event_listener, event: 'memcache.clear', method: 'clearMemcache' }
+
     MongoClient:
         class: MongoClient
         arguments: ['%mongodb_server%']
