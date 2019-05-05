@@ -3,32 +3,35 @@
 {% block title %}Task index{% endblock %}
 
 {% block body %}
-    <h1>Task index</h1>
+    <h1 style="text-align: center; margin-top: 50px">TO DO TASKS BY CATEGORIES</h1>
 
     <table class="table">
         <thead>
-            <tr>
-                <th>Name</th>
-                <th>actions</th>
+            <tr style="text-align: center">
+                <th>Tasks</th>
+                <th>Actions</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody style="text-align: center">
         {% for task in tasks %}
             <tr>
                 <td>{{ task.name }}</td>
                 <td>
-                    <a href="{{ path('task_show', {'id': task.id}) }}">show</a>
-                    <a href="{{ path('task_edit', {'id': task.id}) }}">edit</a>
-                    <a href="{{ path('task_done',{'id': task.id}) }}">done</a>
+                    <a style="color: deepskyblue;" href="{{ path('task_show', {'id': task.id}) }}">SHOW</a>&nbsp;&nbsp;
+                    <a style="color: #f0ca45" href="{{ path('task_edit', {'id': task.id}) }}">EDIT</a>&nbsp;&nbsp;
+                    <a style="color: green" href="{{ path('task_done',{'id': task.id}) }}">DONE</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="3">No Records Found</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('task_new') }}">Create new</a>
+    <div style="text-align: center">
+        <a style="color: #F5871F" href="{{ path('task_new') }}">CREATE NEW TASK</a>
+    </div>
+
 {% endblock %}

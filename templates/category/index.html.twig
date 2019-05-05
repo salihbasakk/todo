@@ -3,32 +3,34 @@
 {% block title %}Category index{% endblock %}
 
 {% block body %}
-    <h1>Category index</h1>
+    <h1 style="text-align: center; margin-top: 50px">TO DO CATEGORIES BY USER</h1>
 
     <table class="table">
         <thead>
-            <tr>
-                <th>Name</th>
-                <th>actions</th>
+            <tr style="text-align: center">
+                <th>Categories</th>
+                <th>Actions</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody style="text-align: center">
         {% for category in categories %}
             <tr>
                 <td>{{ category.name }}</td>
                 <td>
-                    <a href="{{ path('category_show', {'id': category.id}) }}">show</a>
-                    <a href="{{ path('category_edit', {'id': category.id}) }}">edit</a>
-                    <a href="{{ path('task_index', {'category_id': category.id}) }}">to do task</a>
+                    <a style="color: deepskyblue;" href="{{ path('category_show', {'id': category.id}) }}">SHOW</a>&nbsp;&nbsp;
+                    <a style="color: #f0ca45" href="{{ path('category_edit', {'id': category.id}) }}">EDIT</a>&nbsp;&nbsp;
+                    <a style="color: green" href="{{ path('task_index', {'category_id': category.id}) }}">TO DO TASK</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="3">No Records Found</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
+    <div style="text-align: center">
+        <a style="color: #F5871F" href="{{ path('category_new') }}">CREATE NEW CATEGORY</a>
+    </div>
 
-    <a href="{{ path('category_new') }}">Create new</a>
 {% endblock %}
