@@ -1,36 +1,62 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Category index{% endblock %}
+{% block title %}Kategoriler{% endblock %}
 
 {% block body %}
-    <h1 style="text-align: center; margin-top: 50px">TO DO CATEGORIES BY USER</h1>
 
-    <table class="table">
-        <thead>
-            <tr style="text-align: center">
-                <th>Categories</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody style="text-align: center">
-        {% for category in categories %}
-            <tr>
-                <td>{{ category.name }}</td>
-                <td>
-                    <a style="color: deepskyblue;" href="{{ path('category_show', {'id': category.id}) }}">SHOW</a>&nbsp;&nbsp;
-                    <a style="color: #f0ca45" href="{{ path('category_edit', {'id': category.id}) }}">EDIT</a>&nbsp;&nbsp;
-                    <a style="color: green" href="{{ path('task_index', {'category_id': category.id}) }}">TO DO TASK</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">No Records Found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    <div style="text-align: center">
-        <a style="color: #F5871F" href="{{ path('category_new') }}">CREATE NEW CATEGORY</a>
+
+    <div class="limiter">
+        <div class="container-table100">
+            <div class="wrap-table100">
+                <div class="table100 ver1 m-b-110">
+                    <div class="table100-head">
+                        <table>
+                            <thead>
+                            <tr class="row100 head">
+                                <th class="cell100 column1" style="text-align: left !important;">Kategori Adı</th>
+                                <th class="cell100 column2">Düzenle</th>
+                                <th class="cell100 column3">Sil</th>
+                                <th class="cell100 column4">Görüntüle</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+
+                    <div class="table100-body js-pscroll">
+                        <table>
+                            <tbody>
+                            {% for category in categories %}
+                                <tr class="row100 body">
+                                    <td class="cell100 column1" style="text-align: left !important;">{{ category.name }}</td>
+                                    <td class="cell100 column2">
+                                        <a style="color: #ffffff"  class="btn btn-warning" href="{{ path('category_edit', {'id': category.id}) }}">Düzenle</a>&nbsp;&nbsp;</td>
+                                    <td class="cell100 column3">
+                                        <form method="post" action="{{ path('category_delete', {'id': category.id}) }}" onsubmit="return confirm('Emin misiniz?');">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ category.id) }}">
+                                            <button style="color: #ffffff" class="btn btn-danger">Sil</button>
+                                        </form>
+                                    </td>
+                                    <td class="cell100 column4">
+                                        <a style="color: #ffffff;" href="{{ path('category_show', {'id': category.id}) }}"  class="btn btn-info" >Göster</a>&nbsp;&nbsp;</td>
+                                </tr>
+                            {% endfor %}
+
+
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                    <div style="text-align: center;     margin: 80px 0 20px 0;">
+                        <a style="color: #ffffff" href="{{ path('category_new') }}" class="btn btn-success">Yeni Kategori Oluştur</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
+
 
 {% endblock %}

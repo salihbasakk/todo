@@ -1,16 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Category{% endblock %}
+{% block title %}Düzenle{% endblock %}
 
 {% block body %}
-    <h1 style="text-align: center">Edit Category</h1>
-        <div style="text-align: center">
-        {{ include('category/_form.html.twig', {'button_label': 'Update'}) }}
+    <h1 style="text-align: center">Düzenle</h1>
+        <div style="text-align: center;    display: flex;
+    justify-content: center;">
+        {{ include('category/_form.html.twig', {'button_label': 'Kaydet'}) }}
         </div>
-        <div style="text-align: center">
-        <a href="{{ path('category_index') }}">Go to -> Categories List Page</a>
-        </div>
-        <div style="text-align: center">
-        {{ include('category/_delete_form.html.twig') }}
-        </div>
+    <div style="text-align: center;     margin: -100px 0 20px 0;">
+        <a style="color: #ffffff" href="{{ path('category_index') }}" class="btn btn-success">Kategoriler</a>
+    </div>
+
 {% endblock %}

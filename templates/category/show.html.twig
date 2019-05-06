@@ -3,32 +3,56 @@
 {% block title %}Category{% endblock %}
 
 {% block body %}
-    <h1 style="text-align: center; margin-top: 50px">EDIT THIS CATEGORY</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Category Id</th>
-                <td>{{ category.id }}</td>
-            </tr>
-            <tr>
-                <th>Category Name</th>
-                <td>{{ category.name }}</td>
-            </tr>
-        </tbody>
-    </table>
 
-    <div style="text-align: center">
-        <a href="{{ path('category_index') }}">Go to -> Categories List Page</a>
-    </div>
-    <tr>
-        <td>&nbsp;</td>
-    </tr>
-    <div style="text-align: center">
-        <a style="color: yellowgreen" href="{{ path('category_edit', {'id': category.id}) }}">Edit This Category</a>
-    </div>
-    <div style="text-align: center">
-        {{ include('category/_delete_form.html.twig') }}
-    </div>
 
+
+    <div class="limiter">
+        <div class="container-table100">
+            <div class="wrap-table100">
+                <div class="table100 ver1 m-b-110">
+                    <div class="table100-head">
+                        <table>
+                            <thead>
+                            <tr class="row100 head">
+                                <th class="cell100 column1" style="text-align: left !important;    width: 10% !important;">Kategori ID</th>
+                                <th class="cell100 column2">Kategori Adı</th>
+                                <th class="cell100 column2">Sil</th>
+                                <th class="cell100 column2">Düzenle</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+
+                    <div class="table100-body js-pscroll">
+                        <table>
+                            <tbody>
+                                <tr class="row100 body">
+                                    <td class="cell100 column1" style="text-align: left !important;     width: 10%;">{{ category.id }}</td>
+                                    <td class="cell100 column2">
+                                        {{ category.name }}&nbsp;&nbsp;</td>
+                                    <td class="cell100 column2">
+                                        {{ include('category/_delete_form.html.twig') }}&nbsp;</td>
+
+                                    <td class="cell100 column2">
+                                        <a style="color: #ffffff" href="{{ path('category_edit', {'id': category.id}) }}" class="btn btn-warning" >Düzenle</a>&nbsp;</td>
+
+                                </tr>
+
+
+
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                    <div style="text-align: center;     margin: 80px 0 20px 0;">
+                        <a style="color: #ffffff" href="{{ path('category_index') }}" class="btn btn-success">Kategoriler</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 {% endblock %}

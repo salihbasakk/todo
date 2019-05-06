@@ -3,15 +3,58 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <!-- Bootstrap core CSS -->
+
+        {% block stylesheets %}
+
+
+        {% endblock %}
         <link rel="stylesheet"
               href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
               integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
               crossorigin="anonymous">
-        {% block stylesheets %}{% endblock %}
+        <link href="{{ asset('sites/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('sites/fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('sites/vendor/animate/animate.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('sites/vendor/select2/select2.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('sites/vendor/perfect-scrollbar/perfect-scrollbar.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('sites/css/util.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{ asset('sites/css/main.css') }}" rel="stylesheet" type="text/css" />
+<style>
+    .add-form  input {
+        border: 1px solid red !important;
+    }
+
+    .add-form {
+        width: 90%;
+        /* width: 700px; */
+        border: 1px solid #ddd;
+        padding: 50px;
+        min-height: 300px
+    }
+</style>
     </head>
     <body>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
+
+        <script src="{{ asset('sites/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
+        <script src="{{ asset('sites/vendor/bootstrap/js/popper.js') }}"></script>
+        <script src="{{ asset('sites/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('sites/vendor/select2/select2.min.js') }}"></script>
+        <script src="{{ asset('sites/vendor/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+
+        <script>
+            $('.js-pscroll').each(function(){
+                var ps = new PerfectScrollbar(this);
+
+                $(window).on('resize', function(){
+                    ps.update();
+                })
+            });
+
+
+        </script>
+        <!--===============================================================================================-->
+        <script src="js/main.js"></script>
     </body>
 </html>
