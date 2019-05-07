@@ -1,47 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>{% block title %}Homepage!{% endblock %}</title>
+{% extends 'base.html.twig' %}
 
-    {% block stylesheets %}
-        <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-        <link rel="stylesheet" href="{{ asset('vendor/fontawesome/css/font-awesome.min.css') }}">
-    {% endblock %}
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-</head>
-<body>
-<header class="header">
-    <img class="logo-icon" src="{{ asset('images/aquanote-logo.png') }}">
-    <h1 class="logo">To Do List</h1>
-    <ul class="navi">
-        <li class="search"><a href="#" class="js-header-search-toggle"><i class="fa fa-search"></i></a></li>
-        {% if is_granted('ROLE_USER') %}
-            <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
-        {% else %}
-            <li><a href="{{ path('fos_user_security_login') }}">Login</a></li>
-            <li><a href="{{ path('fos_user_registration_register') }}">Register</a></li>
-        {% endif %}
-    </ul>
-</header>
+{% block title %}Homepage!{% endblock %}
 
-<img src="https://cdn.lynda.com/course/365217/365217-636250185175995502-16x9.jpg" style="width: 100%">
-
-{# <div class="main-content">
-    {% for msg in app.session.flashBag.get('success') %}
-    <div class="alert alert-success">
-        {{ msg }}
-    </div>
-    {% endfor %}
-
-    {% block body %}{% endblock %}
-</div>
-#}
-
-{% block javascripts %}
-    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="{{ asset('js/main.js') }}"></script>
+{% block body %}
+        <img src="https://cdn.lynda.com/course/365217/365217-636250185175995502-16x9.jpg" style="width: 100%">
 {% endblock %}
-</body>
-</html>
+

@@ -6,7 +6,7 @@
 
 <div class="login-card">
     <div class="log_head">
-        <h1>LOGIN</h1>
+        <h1>Bilgilerinizi Giriniz</h1>
     </div>
     <div class="log_body">
         <form action="{{ path("fos_user_security_check") }}" method="post">
@@ -16,13 +16,13 @@
 
             <table width="200" border="0" align="center">
                 <tr>
-                    <td><input id="username" value="{{ last_username }}" type="text" name="_username" required="required" class="log_user" placeholder="Username"></td>
+                    <td><input id="username" value="{{ last_username }}" type="text" name="_username" required="required" class="log_user" placeholder="Kullanıcı Adı"></td>
                 </tr>
                 <tr>
                     <td>&nbsp;</td>
                 </tr>
                 <tr>
-                    <td><input id="password" value="Password" type="password" name="_password" required="required" class="log_Pass"></td>
+                    <td><input id="password" type="password" name="_password" required="required" class="log_Pass" value="Şifre"></td>
                 </tr>
                 <tr>
                     <td>&nbsp;</td>
@@ -34,13 +34,13 @@
                     <td>&nbsp;</td>
                 </tr>
                 <tr>
-                    <td style="text-align: center">Don't have account?</td>
+                    <td style="text-align: center">Üye Olmak İçin Hemen Tıklayın!</td>
                 </tr>
                 <tr>
                     <td>&nbsp;</td>
                 </tr>
                 <tr>
-                    <td style="text-align: center"><a href="{{ path('fos_user_registration_register') }}" rel="register">Sign Up</a></td>
+                    <td style="text-align: center"><a href="{{ path('fos_user_registration_register') }}" rel="register">ÜYE OL</a></td>
                 </tr>
             </table>
         </form>

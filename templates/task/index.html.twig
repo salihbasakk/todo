@@ -1,37 +1,62 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Task index{% endblock %}
+{% block title %}Yapılacaklar{% endblock %}
 
 {% block body %}
-    <h1 style="text-align: center; margin-top: 50px">TO DO TASKS BY CATEGORIES</h1>
+    <div class="limiter">
+        <div class="container-table100">
+            <div class="wrap-table100">
+                <div class="table100 ver1 m-b-110">
+                    <div class="table100-head">
+                        <table>
+                            <thead>
+                            <tr class="row100 head">
+                                <th class="cell100 column1" style="text-align: left !important;">Görev Adı</th>
+                                <th class="cell100 column2">Düzenle</th>
+                                <th class="cell100 column3">Sil</th>
+                                <th class="cell100 column4">Görüntüle</th>
+                                <th class="cell100 column5">Durum</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
 
-    <table class="table">
-        <thead>
-            <tr style="text-align: center">
-                <th>Tasks</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody style="text-align: center">
-        {% for task in tasks %}
-            <tr>
-                <td>{{ task.name }}</td>
-                <td>
-                    <a style="color: deepskyblue;" href="{{ path('task_show', {'id': task.id}) }}">SHOW</a>&nbsp;&nbsp;
-                    <a style="color: #f0ca45" href="{{ path('task_edit', {'id': task.id}) }}">EDIT</a>&nbsp;&nbsp;
-                    <a style="color: green" href="{{ path('task_done',{'id': task.id}) }}">DONE</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">No Records Found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                    <div class="table100-body js-pscroll">
+                        <table>
+                            <tbody>
+                            {% for task in tasks %}
+                                <tr class="row100 body">
+                                    <td class="cell100 column1" style="text-align: left !important;">{{ task.name }}</td>
+                                    <td class="cell100 column2">
+                                        <a style="color: #ffffff"  class="btn btn-warning" href="{{ path('task_edit', {'id': task.id}) }}">Düzenle</a>&nbsp;&nbsp;</td>
+                                    <td class="cell100 column3">
+                                        <form method="post" action="{{ path('task_delete', {'id': task.id}) }}" onsubmit="return confirm('Emin misiniz?');">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ task.id) }}">
+                                            <button style="color: #ffffff" class="btn btn-danger">Sil</button>
+                                        </form>
+                                    </td>
+                                    <td class="cell100 column4">
+                                        <a style="color: #ffffff;" href="{{ path('task_show', {'id': task.id}) }}"  class="btn btn-info" >Göster</a>&nbsp;&nbsp;
+                                    </td>
+                                    <td class="cell100 column5">
+                                        <a style="color: #ffffff;" href="{{ path('task_done', {'id': task.id}) }}"  class="btn btn-dark" >Yapıldı!</a>&nbsp;&nbsp;
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
 
-    <div style="text-align: center">
-        <a style="color: #F5871F" href="{{ path('task_new') }}">CREATE NEW TASK</a>
+
+                    </div>
+                    <div style="text-align: center;     margin: 80px 0 20px 0;">
+                        <a style="color: #ffffff" href="{{ path('task_new') }}" class="btn btn-success">Yeni Görev Oluştur</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
-
 {% endblock %}
+
+

@@ -1,0 +1,15 @@
+{% extends "layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+
+    <div style="margin-top: 50px !important;" class="p-3 mb-2 bg-secondary text-white">Üye Olma İşlemi Başarılı! Yapılacaklar Listenizi Kategorize Edip Çalışmaya Başlayabilirsiniz!</div>
+
+    <div style="text-align: center; margin: 80px 0 20px 0; margin-bottom: 100px;">
+        <a style="color: #ffffff" href="{{ path('category_index') }}" class="btn btn-success">Kategoriler</a>
+    </div>
+    {% if targetUrl %}
+    <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
+    {% endif %}
+{% endblock fos_user_content %}

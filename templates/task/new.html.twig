@@ -1,13 +1,14 @@
+
 {% extends 'base.html.twig' %}
 
 {% block title %}New Task{% endblock %}
 
 {% block body %}
-    <h1 style="text-align: center; margin-top: 50px">CREATE NEW TASK</h1>
+    <h1 style="text-align: center; margin-top: 50px">Yeni Görev Oluştur</h1>
     <div style="text-align: center">
-    {{ include('task/_form.html.twig') }}
+        {{ include('task/_form.html.twig') }}
     </div>
     <div style="text-align: center">
-    <a href="{{ path('task_index') }}">Go to -> Task List Page</a>
+        <a href="{{ path('task_index') }}">Görevler Listesine Git</a>
     </div>
 {% endblock %}

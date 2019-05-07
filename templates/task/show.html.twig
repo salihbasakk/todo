@@ -3,31 +3,43 @@
 {% block title %}Task{% endblock %}
 
 {% block body %}
-    <h1 style="text-align: center; margin-top: 50px">EDIT THIS TASK</h1>
+    <div class="limiter">
+        <div class="container-table100">
+            <div class="wrap-table100">
+                <div class="table100 ver1 m-b-110">
+                    <div class="table100-head">
+                        <table>
+                            <thead>
+                            <tr class="row100 head">
+                                <th class="cell100 column1" style="text-align: left !important;    width: 10% !important;">Görev Numarası</th>
+                                <th class="cell100 column2">Görev Adı</th>
+                                <th class="cell100 column2">Sil</th>
+                                <th class="cell100 column2">Düzenle</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="table100-body js-pscroll">
+                        <table>
+                            <tbody>
+                            <tr class="row100 body">
+                                <td class="cell100 column1" style="text-align: left !important;     width: 10%;">{{ task.id }}</td>
+                                <td class="cell100 column2">
+                                    {{ task.name }}&nbsp;&nbsp;</td>
+                                <td class="cell100 column2">
+                                    {{ include('task/_delete_form.html.twig') }}&nbsp;</td>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Task Id</th>
-                <td>{{ task.id }}</td>
-            </tr>
-            <tr>
-                <th>Task Name</th>
-                <td>{{ task.name }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <div style="text-align: center">
-        <a href="{{ path('task_index') }}">Go to -> Tasks List Page</a>
-    </div>
-    <tr>
-        <td>&nbsp;</td>
-    </tr>
-    <div style="text-align: center">
-        <a style="color: yellowgreen" href="{{ path('task_edit', {'id': task.id}) }}">Edit This Task</a>
-    </div>
-    <div style="text-align: center">
-        {{ include('task/_delete_form.html.twig') }}
+                                <td class="cell100 column2">
+                                    <a style="color: #ffffff" href="{{ path('task_edit', {'id': task.id}) }}" class="btn btn-warning" >Düzenle</a>&nbsp;</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div style="text-align: center;     margin: 80px 0 20px 0;">
+                        <a style="color: #ffffff" href="{{ path('task_index') }}" class="btn btn-success">Görevler</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}

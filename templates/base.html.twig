@@ -5,56 +5,53 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
 
         {% block stylesheets %}
-
-
+            <link href="{{ asset('css/login.css') }}" rel="stylesheet" type="text/css" />
+            <link href="{{ asset('sites/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+            <link href="{{ asset('sites/fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
+            <link href="{{ asset('sites/vendor/animate/animate.css') }}" rel="stylesheet" type="text/css" />
+            <link href="{{ asset('sites/vendor/select2/select2.min.css') }}" rel="stylesheet" type="text/css" />
+            <link href="{{ asset('sites/vendor/perfect-scrollbar/perfect-scrollbar.css') }}" rel="stylesheet" type="text/css" />
+            <link href="{{ asset('sites/css/util.css') }}" rel="stylesheet" type="text/css" />
+            <link href="{{ asset('sites/css/main.css') }}" rel="stylesheet" type="text/css" />
+            <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
         {% endblock %}
-        <link rel="stylesheet"
-              href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-              integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-              crossorigin="anonymous">
-        <link href="{{ asset('sites/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-        <link href="{{ asset('sites/fonts/font-awesome-4.7.0/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
-        <link href="{{ asset('sites/vendor/animate/animate.css') }}" rel="stylesheet" type="text/css" />
-        <link href="{{ asset('sites/vendor/select2/select2.min.css') }}" rel="stylesheet" type="text/css" />
-        <link href="{{ asset('sites/vendor/perfect-scrollbar/perfect-scrollbar.css') }}" rel="stylesheet" type="text/css" />
-        <link href="{{ asset('sites/css/util.css') }}" rel="stylesheet" type="text/css" />
-        <link href="{{ asset('sites/css/main.css') }}" rel="stylesheet" type="text/css" />
-<style>
-    .add-form  input {
-        border: 1px solid red !important;
-    }
+            <style>
+                .add-form  input {
+                    border: 1px solid red !important;
+                }
 
-    .add-form {
-        width: 90%;
-        /* width: 700px; */
-        border: 1px solid #ddd;
-        padding: 50px;
-        min-height: 300px
-    }
-</style>
+                .add-form {
+                    width: 90%;
+                    /* width: 700px; */
+                    border: 1px solid #ddd;
+                    padding: 50px;
+                    min-height: 300px
+                }
+            </style>
     </head>
     <body>
+        <header class="header">
+            <img class="logo-icon" src="{{ asset('images/aquanote-logo.png') }}">
+            <h1 class="logo" style="margin-top: 13px; margin-left: 50px;"><a href="{{ path('home')  }}" style="color: black;">Yapılacaklar Listesi</a></h1>
+            <ul class="navi">
+                {% if is_granted('ROLE_USER') %}
+                    <li><a href="{{ path('category_index') }}" class="btn btn-success">Kategoriler</a></li>
+                    <li><a href="{{ path('fos_user_security_logout') }}" class="btn btn-danger">Çıkış Yap</a></li>
+                {% else %}
+                    <li><a href="{{ path('fos_user_security_login') }}" class="btn btn-success">Giriş Yap</a></li>
+                    <li><a href="{{ path('fos_user_registration_register') }}" class="btn btn-info">Üye Ol</a></li>
+                {% endif %}
+            </ul>
+        </header>
+
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
 
-        <script src="{{ asset('sites/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
-        <script src="{{ asset('sites/vendor/bootstrap/js/popper.js') }}"></script>
-        <script src="{{ asset('sites/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-        <script src="{{ asset('sites/vendor/select2/select2.min.js') }}"></script>
-        <script src="{{ asset('sites/vendor/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+        <div class="footer">
+                <p class="footer-text" >© Yıldız Teknik Üniversitesi</p>
+        </div>
 
-        <script>
-            $('.js-pscroll').each(function(){
-                var ps = new PerfectScrollbar(this);
-
-                $(window).on('resize', function(){
-                    ps.update();
-                })
-            });
-
-
-        </script>
-        <!--===============================================================================================-->
-        <script src="js/main.js"></script>
+        {% block javascripts %}
+        {% endblock %}
     </body>
 </html>
+
