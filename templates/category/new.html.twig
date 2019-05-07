@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Category{% endblock %}
+{% block title %}Yeni Kategori{% endblock %}
 
 {% block body %}
     <h1 style="text-align: center; margin-top: 50px">Yeni Kategori Oluştur</h1>
@@ -8,6 +8,6 @@
     {{ include('category/_form.html.twig') }}
     </div>
     <div style="text-align: center">
-        <a href="{{ path('category_index') }}">Kategori Listesine Git</a>
+        <a class="btn btn-success" style="margin-bottom: 30px" href="{{ path('category_index') }}">Kategori Listesine Git</a>
     </div>
 {% endblock %}
