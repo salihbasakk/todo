@@ -34,29 +34,11 @@ class TaskController extends AbstractController
     /**
      * @Route("/", name="task_index", methods={"GET"})
      */
-    public function index(Request $request, TaskRepository $taskRepository, \Memcached $mem, EventDispatcherInterface $dispatcher): Response
+    public function index(Request $request, TaskRepository $taskRepository): Response
     {
         $categoryId = $request->get('category_id');
 
-        $memcacheKey = 'tasks' . $categoryId;
-
-        if(!($tasks = $mem->get($memcacheKey))){
-            $tasks = $taskRepository->findBy(["category" => $categoryId, "user" => $this->getUser(), "status" => '0']);
-
-            $mem->set($memcacheKey, $tasks,1500);
-
-        } elseif (!($tasks == $taskRepository->findBy(["category" => $categoryId, "user" => $this->getUser(), "status" => '0']))) {
-
-            $event = new MemcacheEvent();
-
-            $event->setMemcacheKey($memcacheKey);
-
-            $dispatcher->dispatch(MemcacheEvent::NAME, $event);
-
-            $tasks = $taskRepository->findBy(["category" => $categoryId, "user" => $this->getUser(), "status" => '0']);
-
-            $mem->set($memcacheKey, $tasks,1500);
-        }
+        $tasks = $taskRepository->findBy(["category" => $categoryId, "user" => $this->getUser(), "status" => '0']);
 
         return $this->render('task/index.html.twig', [
             'tasks' =>$tasks
@@ -68,7 +50,10 @@ class TaskController extends AbstractController
      */
     public function new(Request $request): Response
     {
-        $task = new Task();
+        $task = (new Task())
+            ->setUser($this->getUser())
+            ->setStatus(0);
+
         $form = $this->createForm(TaskType::class, $task);
         $form->handleRequest($request);
 

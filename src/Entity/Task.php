@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\User;
+use App\Entity\Category;
 
 /**
  * Task
@@ -71,29 +73,44 @@ class Task
         return $this;
     }
 
-    public function getUser(): ?User
+    /**
+     * @return User
+     */
+    public function getUser(): User
     {
         return $this->user;
     }
 
-    public function setUser(?User $user): self
+    /**
+     * @param User $user
+     *
+     * @return Task
+     */
+    public function setUser(User $user): Task
     {
         $this->user = $user;
-
         return $this;
     }
 
-    public function getCategory(): ?Category
+    /**
+     * @return Category
+     */
+    public function getCategory(): Category
     {
         return $this->category;
     }
 
-    public function setCategory(?Category $category): self
+    /**
+     * @param Category $category
+     *
+     * @return Task
+     */
+    public function setCategory(Category $category): Task
     {
         $this->category = $category;
-
         return $this;
     }
+
 
     public function getStatus(): ?int
     {

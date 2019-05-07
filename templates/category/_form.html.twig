@@ -4,15 +4,3 @@
         <button style="color: #ffffff" class="btn btn-info">{{ button_label|default('Kaydet') }}</button>
     {{ form_end(form) }}
 </div>
-
-<form method="post">
-    <div style="margin: 50px  ; "  class="add-form">
-        <label for="category_name" class="required">Kategori Adı Giriniz</label>
-        <input style="width: 100%;
-               padding: 12px 20px;
-               margin: 8px 0;
-               box-sizing: border-box;" type="text" id="category_name" name="category[name]" required="required" maxlength="255">
-        <input type="hidden" id="category__token" name="category[_token]" value="{{ csrf_token('new') }}">
-        <button type="submit" style="color: #ffffff" class="btn btn-info">{{ button_label|default('Kaydet') }}</button>
-    </div>
-</form>

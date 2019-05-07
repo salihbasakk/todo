@@ -17,11 +17,12 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class CategoryController extends AbstractController
 {
-    /** @var EntityManagerInterface $em*/
+    /** @var EntityManagerInterface $em */
     private $em;
 
     /**
      * TaskController constructor.
+     *
      * @param EntityManagerInterface $em
      */
     public function __construct(EntityManagerInterface $em)
@@ -44,8 +45,11 @@ class CategoryController extends AbstractController
      */
     public function new(Request $request): Response
     {
-        $category = new Category();
-        $form = $this->createForm(CategoryType::class, $category);
+
+        $category = (new Category())
+            ->setUser($this->getUser());
+
+        $form     = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -58,7 +62,7 @@ class CategoryController extends AbstractController
 
         return $this->render('category/new.html.twig', [
             'category' => $category,
-            'form' => $form->createView(),
+            'form'     => $form->createView(),
         ]);
     }
 
@@ -90,7 +94,7 @@ class CategoryController extends AbstractController
 
         return $this->render('category/edit.html.twig', [
             'category' => $category,
-            'form' => $form->createView(),
+            'form'     => $form->createView(),
         ]);
     }
 
@@ -99,7 +103,7 @@ class CategoryController extends AbstractController
      */
     public function delete(Request $request, Category $category): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $category->getId(), $request->request->get('_token'))) {
             $this->em->remove($category);
             $this->em->flush();
         }

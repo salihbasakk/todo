@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use App\Entity\User;
 
 /**
  * Category
@@ -64,14 +65,23 @@ class Category
         return $this;
     }
 
-    public function getUser(): ?User
+    /**
+     * @return User
+     */
+    public function getUser(): User
     {
         return $this->user;
     }
 
-    public function setUser(?User $user): self
+    /**
+     * @param User $user
+     *
+     * @return Category
+     */
+    public function setUser(User $user): Category
     {
         $this->user = $user;
+        return $this;
     }
 
     public function __toString()

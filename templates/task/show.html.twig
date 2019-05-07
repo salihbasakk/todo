@@ -11,25 +11,23 @@
                         <table>
                             <thead>
                             <tr class="row100 head">
-                                <th class="cell100 column1" style="text-align: left !important;    width: 10% !important;">Görev Numarası</th>
-                                <th class="cell100 column2">Görev Adı</th>
+                                <th class="cell100 column1" style="text-align: left !important;    width: 10% !important;">Görev Adı</th>
                                 <th class="cell100 column2">Sil</th>
-                                <th class="cell100 column2">Düzenle</th>
+                                <th class="cell100 column3">Düzenle</th>
                             </tr>
                             </thead>
                         </table>
                     </div>
+
                     <div class="table100-body js-pscroll">
                         <table>
                             <tbody>
                             <tr class="row100 body">
-                                <td class="cell100 column1" style="text-align: left !important;     width: 10%;">{{ task.id }}</td>
-                                <td class="cell100 column2">
+                                <td class="cell100 column1" style="text-align: left !important;     width: 10%;">
                                     {{ task.name }}&nbsp;&nbsp;</td>
                                 <td class="cell100 column2">
                                     {{ include('task/_delete_form.html.twig') }}&nbsp;</td>
-
-                                <td class="cell100 column2">
+                                <td class="cell100 column3">
                                     <a style="color: #ffffff" href="{{ path('task_edit', {'id': task.id}) }}" class="btn btn-warning" >Düzenle</a>&nbsp;</td>
                             </tr>
                             </tbody>

@@ -1,5 +1,5 @@
 <form method="post" action="{{ path('task_delete', {'id': task.id}) }}" onsubmit="return confirm('Emin misiniz?');" style="display: inline-block">
     <input type="hidden" name="_method" value="DELETE">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ task.id) }}">
-    <button style="color: #ffffff" class="btn">Sil</button>
+    <button style="color: #ffffff" class="btn btn-danger" >Sil</button>
 </form>
