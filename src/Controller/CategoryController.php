@@ -67,16 +67,6 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="category_show", methods={"GET"})
-     */
-    public function show(Category $category): Response
-    {
-        return $this->render('category/show.html.twig', [
-            'category' => $category,
-        ]);
-    }
-
-    /**
      * @Route("/{id}/edit", name="category_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Category $category): Response
@@ -96,11 +86,9 @@ class CategoryController extends AbstractController
             'category' => $category,
             'form'     => $form->createView(),
         ]);
-    }
-
-    /**
-     * @Route("/{id}", name="category_delete", methods={"DELETE"})
-     */
+    } /**
+ * @Route("/{id}", name="category_delete", methods={"DELETE"})
+ */
     public function delete(Request $request, Category $category): Response
     {
         if ($this->isCsrfTokenValid('delete' . $category->getId(), $request->request->get('_token'))) {
@@ -110,4 +98,6 @@ class CategoryController extends AbstractController
 
         return $this->redirectToRoute('category_index');
     }
+
+
 }

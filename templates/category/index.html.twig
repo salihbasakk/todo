@@ -14,8 +14,7 @@
                                 <th class="cell100 column1" style="text-align: left !important;">Kategori Adı</th>
                                 <th class="cell100 column2">Düzenle</th>
                                 <th class="cell100 column3">Sil</th>
-                                <th class="cell100 column4">Görüntüle</th>
-                                <th class="cell100 column5">Yapılacaklar</th>
+                                <th class="cell100 column4">Yapılacaklar</th>
                             </tr>
                             </thead>
                         </table>
@@ -37,9 +36,6 @@
                                         </form>
                                     </td>
                                     <td class="cell100 column4">
-                                        <a style="color: #ffffff;" href="{{ path('category_show', {'id': category.id}) }}"  class="btn btn-info" >Göster</a>&nbsp;&nbsp;
-                                    </td>
-                                    <td class="cell100 column5">
                                         <a style="color: #ffffff;" href="{{ path('task_index', {'category_id': category.id}) }}"  class="btn btn-dark" >Yapılacaklar</a>&nbsp;&nbsp;
                                     </td>
                                 </tr>

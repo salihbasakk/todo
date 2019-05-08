@@ -14,8 +14,7 @@
                                 <th class="cell100 column1" style="text-align: left !important;">Görev Adı</th>
                                 <th class="cell100 column2">Düzenle</th>
                                 <th class="cell100 column3">Sil</th>
-                                <th class="cell100 column4">Görüntüle</th>
-                                <th class="cell100 column5">Durum</th>
+                                <th class="cell100 column4">Durum</th>
                             </tr>
                             </thead>
                         </table>
@@ -28,7 +27,8 @@
                                 <tr class="row100 body">
                                     <td class="cell100 column1" style="text-align: left !important;">{{ task.name }}</td>
                                     <td class="cell100 column2">
-                                        <a style="color: #ffffff"  class="btn btn-warning" href="{{ path('task_edit', {'id': task.id}) }}">Düzenle</a>&nbsp;&nbsp;</td>
+                                        <a style="color: #ffffff"  class="btn btn-warning" href="{{ path('task_edit', {'id': task.id}) }}">Düzenle</a>
+                                    </td>
                                     <td class="cell100 column3">
                                         <form method="post" action="{{ path('task_delete', {'id': task.id}) }}" onsubmit="return confirm('Emin misiniz?');">
                                             <input type="hidden" name="_method" value="DELETE">
@@ -37,10 +37,7 @@
                                         </form>
                                     </td>
                                     <td class="cell100 column4">
-                                        <a style="color: #ffffff;" href="{{ path('task_show', {'id': task.id}) }}"  class="btn btn-info" >Göster</a>&nbsp;&nbsp;
-                                    </td>
-                                    <td class="cell100 column5">
-                                        <a style="color: #ffffff;" href="{{ path('task_done', {'id': task.id}) }}"  class="btn btn-dark" >Yapıldı!</a>&nbsp;&nbsp;
+                                        <a style="color: #ffffff;" href="{{ path('task_done', {'id': task.id}) }}"  class="btn btn-dark" >Yapıldı!</a>
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -50,7 +47,7 @@
 
                     </div>
                     <div style="text-align: center;     margin: 80px 0 20px 0;">
-                        <a style="color: #ffffff" href="{{ path('task_new') }}" class="btn btn-success">Yeni Görev Oluştur</a>
+                        <a style="color: #ffffff" href="{{ path('task_new', {'category_id': category.id}) }}" class="btn btn-success">Yeni Görev Oluştur</a>
                     </div>
                 </div>
 

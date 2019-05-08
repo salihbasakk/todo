@@ -31,6 +31,13 @@ class User extends BaseUser
      */
     protected $tasks;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="Category", mappedBy="user")
+     */
+    protected $categories;
+
     public function getId(): ?int
     {
         return $this->id;

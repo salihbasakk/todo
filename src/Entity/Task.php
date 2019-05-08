@@ -111,15 +111,23 @@ class Task
         return $this;
     }
 
-
-    public function getStatus(): ?int
+    /**
+     * @return int
+     */
+    public function getStatus(): int
     {
         return $this->status;
     }
 
-    public function setStatus(int $status): void
+    /**
+     * @param int $status
+     *
+     * @return Task
+     */
+    public function setStatus(int $status): Task
     {
         $this->status = $status;
+        return $this;
     }
 
 

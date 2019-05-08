@@ -4,8 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Task;
 use App\Event\DoneEvent;
-use App\Event\MemcacheEvent;
 use App\Form\TaskType;
+use App\Repository\CategoryRepository;
 use App\Repository\TaskRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -34,23 +34,39 @@ class TaskController extends AbstractController
     /**
      * @Route("/", name="task_index", methods={"GET"})
      */
-    public function index(Request $request, TaskRepository $taskRepository): Response
+    public function index(Request $request, TaskRepository $taskRepository, CategoryRepository $categoryRepository): Response
     {
         $categoryId = $request->get('category_id');
 
         $tasks = $taskRepository->findBy(["category" => $categoryId, "user" => $this->getUser(), "status" => '0']);
 
+        if (isset($categoryId)) {
+            $category = $categoryRepository->find($categoryId);
+
+            return $this->render('task/index.html.twig', [
+                'tasks' => $tasks,
+                'category' => $category
+            ]);
+        }
+
         return $this->render('task/index.html.twig', [
-            'tasks' =>$tasks
+            'tasks' => $tasks
         ]);
     }
 
     /**
      * @Route("/new", name="task_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, CategoryRepository $categoryRepository, TaskRepository $taskRepository): Response
     {
+        $categoryId = $request->get('category_id');
+
+        $category = $categoryRepository->find($categoryId);
+
+        $tasks = $taskRepository->findBy(["category" => $categoryId, "user" => $this->getUser(), "status" => '0']);
+
         $task = (new Task())
+            ->setCategory($category)
             ->setUser($this->getUser())
             ->setStatus(0);
 
@@ -61,22 +77,17 @@ class TaskController extends AbstractController
             $this->em->persist($task);
             $this->em->flush();
 
-            return $this->redirectToRoute('task_index');
+            $tasks = $taskRepository->findBy(["category" => $categoryId, "user" => $this->getUser(), "status" => '0']);
+
+            return $this->render('task/index.html.twig', [
+                'tasks' => $tasks,
+                'category' => $category
+            ]);
         }
 
         return $this->render('task/new.html.twig', [
             'task' => $task,
             'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="task_show", methods={"GET"})
-     */
-    public function show(Task $task): Response
-    {
-        return $this->render('task/show.html.twig', [
-            'task' => $task,
         ]);
     }
 
