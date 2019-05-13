@@ -63,8 +63,6 @@ class TaskController extends AbstractController
 
         $category = $categoryRepository->find($categoryId);
 
-        $tasks = $taskRepository->findBy(["category" => $categoryId, "user" => $this->getUser(), "status" => '0']);
-
         $task = (new Task())
             ->setCategory($category)
             ->setUser($this->getUser())
@@ -94,9 +92,12 @@ class TaskController extends AbstractController
     /**
      * @Route("/{id}/edit", name="task_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Task $task): Response
+    public function edit(Request $request, Task $task, CategoryRepository $categoryRepository): Response
     {
+        $categoryId = $task->getCategory()->getId();
+
         $form = $this->createForm(TaskType::class, $task);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -104,6 +105,7 @@ class TaskController extends AbstractController
 
             return $this->redirectToRoute('task_index', [
                 'id' => $task->getId(),
+                'category_id' => $categoryId
             ]);
         }
 
@@ -116,14 +118,23 @@ class TaskController extends AbstractController
     /**
      * @Route("/{id}", name="task_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Task $task): Response
+    public function delete(Request $request, Task $task, TaskRepository $taskRepository, CategoryRepository $categoryRepository): Response
     {
+        $categoryId = $task->getCategory()->getId();
+
+        $category = $categoryRepository->find($categoryId);
+
         if ($this->isCsrfTokenValid('delete'.$task->getId(), $request->request->get('_token'))) {
             $this->em->remove($task);
             $this->em->flush();
         }
 
-        return $this->redirectToRoute('task_index');
+        $tasks = $taskRepository->findBy(["category" => $categoryId, "user" => $this->getUser(), "status" => '0']);
+
+        return $this->render('task/index.html.twig', [
+            'tasks' => $tasks,
+            'category' => $category
+        ]);
     }
 
     /**
